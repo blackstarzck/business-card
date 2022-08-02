@@ -1,0 +1,5 @@
+@value makerWhite from "./common/colors.css";
+
+body {
+    background-color: makerBlack;
+}
