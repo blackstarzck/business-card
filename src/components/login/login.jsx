@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Footer from '../footer/footer';
 import Header from '../header/header';
 import styles from './login.module.css';
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ authService }) => {
+  const navigate  = useNavigate();
+  const goToMaker = (userId) => {
+    navigate("/maker", {
+      state: { id: userId }
+    });
+  }
   const onLogin = event => {
     authService //
       .login(event.currentTarget.textContent)
-      .then(console.log);
+      .then(data => {
+        console.log(data);
+        goToMaker(data.user.uid);
+      });
   };
+
+  // 로그인 정보가 있을 경우 자동 로그인을 실행한다.
+  useEffect(() => {
+    authService
+    .onAuthChange(user => {
+      user && goToMaker(user.id); // id = uid
+    });
+  });
+
   return (
     <section className={styles.login}>
       <Header />
