@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./maker.module.css"
 import Footer from '../footer/footer';
 import Header from '../header/header';
@@ -7,6 +7,35 @@ import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 const Maker = ({ authService }) => {
+    const [ cards, setCards ] = useState([
+        {
+            id: "1", 
+            name: "chanki", 
+            theme: "light", 
+            title: "Software Engineer", 
+            email: "bucheongosok@gmail.com",
+            fileName: "FILE",
+            fileURL: "png"
+        },
+        {
+            id: "2", 
+            name: "chanki", 
+            theme: "light", 
+            title: "Software Engineer", 
+            email: "bucheongosok@gmail.com",
+            fileName: "FILE",
+            fileURL: "png"
+        },
+        {
+            id: "3", 
+            name: "chanki", 
+            theme: "light", 
+            title: "Software Engineer", 
+            email: "bucheongosok@gmail.com",
+            fileName: "FILE",
+            fileURL: "png"
+        }
+    ]);
     const navigate  = useNavigate();
 
     const onLogout = () => {
@@ -25,8 +54,8 @@ const Maker = ({ authService }) => {
         <section className={styles.maker}>
             <Header onLogout={onLogout}/>
             <div className={styles.container}>
-                <Editor/>
-                <Preview/>
+                <Editor cards={cards}/>
+                <Preview cards={cards}/>
             </div>
             <Footer/>
         </section>
