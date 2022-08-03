@@ -10,30 +10,36 @@ const Maker = ({ authService }) => {
     const [ cards, setCards ] = useState([
         {
             id: "1", 
-            name: "chanki", 
-            theme: "light", 
+            name: "chanki",
+            company: "GOSOK",
+            theme: "dark", 
             title: "Software Engineer", 
             email: "bucheongosok@gmail.com",
+            message: "1번 메시지",
             fileName: "FILE",
-            fileURL: "png"
+            fileURL: null
         },
         {
             id: "2", 
             name: "chanki", 
+            company: "GOSOK",
             theme: "light", 
             title: "Software Engineer", 
             email: "bucheongosok@gmail.com",
+            message: "2번 메시지",
             fileName: "FILE",
             fileURL: "png"
         },
         {
             id: "3", 
-            name: "chanki", 
-            theme: "light", 
+            name: "chanki",
+            company: "GOSOK",
+            theme: "colorful", 
             title: "Software Engineer", 
             email: "bucheongosok@gmail.com",
+            message: "3번 메시지",
             fileName: "FILE",
-            fileURL: "png"
+            fileURL: null
         }
     ]);
     const navigate  = useNavigate();
