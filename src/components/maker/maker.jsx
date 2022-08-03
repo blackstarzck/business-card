@@ -7,8 +7,8 @@ import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 const Maker = ({ authService }) => {
-    const [ cards, setCards ] = useState([
-        {
+    const [ cards, setCards ] = useState({
+        "1": {
             id: "1", 
             name: "chanki",
             company: "GOSOK",
@@ -19,7 +19,7 @@ const Maker = ({ authService }) => {
             fileName: "FILE",
             fileURL: null
         },
-        {
+        "2": {
             id: "2", 
             name: "chanki", 
             company: "GOSOK",
@@ -30,7 +30,7 @@ const Maker = ({ authService }) => {
             fileName: "FILE",
             fileURL: "png"
         },
-        {
+        "3": {
             id: "3", 
             name: "chanki",
             company: "GOSOK",
@@ -41,7 +41,8 @@ const Maker = ({ authService }) => {
             fileName: "FILE",
             fileURL: null
         }
-    ]);
+    });
+
     const navigate  = useNavigate();
 
     const onLogout = () => {
@@ -56,21 +57,44 @@ const Maker = ({ authService }) => {
         });
     });
 
-    const addCard = card => {
-        console.log(card)
+    const createOrUpdateCard = card => {
+        console.log(card);
 
-        const updated = [...cards, card];
-        setCards(updated);
+        // #1:
+        // const updated = {...cards};
+        // updated[card.id] = card;
+        // setCards(updated);
 
-        console.log(cards)
+        // #2:
+        setCards(cards => {
+            const updated = {...cards};
+            updated[card.id] = card;
+            return updated
+        });
+    }
+    const deleteCard = card => {
+        console.log(card);
+
+        setCards(cards => {
+            const updated = {...cards};
+            delete updated[card.id];
+            return updated
+        });
     }
 
     return (
         <section className={styles.maker}>
             <Header onLogout={onLogout}/>
             <div className={styles.container}>
-                <Editor cards={cards} addCard={addCard}/>
-                <Preview cards={cards}/>
+                <Editor 
+                    cards={cards} 
+                    addCard={createOrUpdateCard} 
+                    updateCard={createOrUpdateCard} 
+                    deleteCard={deleteCard}
+                />
+                <Preview
+                    cards={cards}
+                />
             </div>
             <Footer/>
         </section>
