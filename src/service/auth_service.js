@@ -11,9 +11,13 @@ class AuthService {
     }
 
     onAuthChange(onUserChanged){
+        //  사용자가 바뀌었을떄
+        // onUserChanged: 함수
+        // onUserChanged 인자로 "user" 정보를 전달한다.
+
         firebase.auth().onAuthStateChanged(user => {
             onUserChanged(user);
-        })
+        });
     }
 }
 

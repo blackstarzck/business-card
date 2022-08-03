@@ -15,6 +15,7 @@ const Login = ({ authService }) => {
     authService //
       .login(event.currentTarget.textContent)
       .then(data => {
+        console.log(`%c로그인 | UID: ${data.user.uid} | time: ${new Date}`, "color: gold");
         console.log(data);
         goToMaker(data.user.uid);
       });
@@ -24,6 +25,8 @@ const Login = ({ authService }) => {
   useEffect(() => {
     authService
     .onAuthChange(user => {
+      // onAuthStateChanged의 return값으로 user정보를 받아온다. 
+
       user && goToMaker(user.id); // id = uid
     });
   });
