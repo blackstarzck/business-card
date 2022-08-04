@@ -30,8 +30,6 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
         deleteCard(card);
     }
 
-    console.log(fileName)
-
     return (
         <form className={styles.form}>
             <input className={styles.input} type="text" name="name" onChange={onChange} value={name} />

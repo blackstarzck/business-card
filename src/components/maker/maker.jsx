@@ -6,42 +6,10 @@ import { useNavigate } from "react-router-dom";
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
-const Maker = ({ FileInput, authService }) => {
-    const [ cards, setCards ] = useState({
-        "1": {
-            id: "1", 
-            name: "chanki",
-            company: "GOSOK",
-            theme: "dark", 
-            title: "Software Engineer", 
-            email: "bucheongosok@gmail.com",
-            message: "1번 메시지",
-            fileName: "Default File Name",
-            fileURL: null
-        },
-        "2": {
-            id: "2", 
-            name: "chanki", 
-            company: "GOSOK",
-            theme: "light", 
-            title: "Software Engineer", 
-            email: "bucheongosok@gmail.com",
-            message: "2번 메시지",
-            fileName: "Default File Name",
-            fileURL: "png"
-        },
-        "3": {
-            id: "3", 
-            name: "chanki",
-            company: "GOSOK",
-            theme: "colorful", 
-            title: "Software Engineer", 
-            email: "bucheongosok@gmail.com",
-            message: "3번 메시지",
-            fileName: "Default File Name",
-            fileURL: null
-        }
-    });
+const Maker = ({ FileInput, authService, cardRepository }) => {
+    const historyState = useNavigate().state;
+    const [ userId, setUserId ] = useState( historyState && historyState.id );
+    const [ cards, setCards ] = useState({});
 
     const navigate  = useNavigate();
 
@@ -49,17 +17,32 @@ const Maker = ({ FileInput, authService }) => {
         console.log(`%c로그아웃 | time: ${new Date}`, "color: darkorange");
         authService.logout();
     }
+    useEffect(() => {
+        if(!userId) return;
+        
+        const stopSync = cardRepository.syncCard(userId, cards => {
+            setCards(cards);
+        });
+
+        // 컴포넌트가 언마운트 되었을때
+        // 불필요한 네트워크 사용을 최소화 하기 위함
+        return () => stopSync();
+
+    }, [userId]);
 
     useEffect(() => {
         authService
         .onAuthChange(user => {
-            if(!user) navigate("/");
+            if(user){
+                setUserId(user.uid);
+                console.log(`firebase user ID: ${userId}`);
+            }else{
+                navigate("/"); // 로그인 화면으로  이동
+            }
         });
     });
 
     const createOrUpdateCard = card => {
-        console.log(card);
-
         // #1:
         // const updated = {...cards};
         // updated[card.id] = card;
@@ -71,6 +54,9 @@ const Maker = ({ FileInput, authService }) => {
             updated[card.id] = card;
             return updated
         });
+
+        // 파이어베이스 실시간 데이터베이스 write
+        cardRepository.saveCard(userId, card);
     }
     const deleteCard = card => {
         console.log(card);
@@ -80,6 +66,9 @@ const Maker = ({ FileInput, authService }) => {
             delete updated[card.id];
             return updated
         });
+
+        // 파이어베이스 실시간 데이터베이스 delete
+        cardRepository.removeCard(userId, card);
     }
 
     return (
