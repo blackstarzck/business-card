@@ -24,6 +24,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
         console.log(`%c로그아웃 | time: ${new Date}`, "color: darkorange");
         authService.logout();
     }, [authService]);
+
     useEffect(() => {
         if(!userId) return;
 
@@ -44,7 +45,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
                 setUserId(user.uid);
                 console.log(`firebase user ID: ${userId}`);
             }else{
-                navigate("/"); // 로그인 화면으로  이동
+                navigate("/business-card"); // 로그인 화면으로  이동
             }
         });
     }, [authService, userId, navigate]);

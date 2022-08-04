@@ -7,10 +7,11 @@ import Maker from './components/maker/maker';
 function App({ FileInput, authService, cardRepository }) {
   return (
     <div className={styles.app}>
+      ?
       <BrowserRouter>
         <Routes>
           <Route 
-            path="/"
+            path="/business-card"
             element={ <Login authService={authService} /> }
           />
           <Route
