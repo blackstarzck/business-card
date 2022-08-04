@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import styles from "./maker.module.css"
 import Footer from '../footer/footer';
 import Header from '../header/header';
@@ -13,10 +13,17 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
 
     const navigate  = useNavigate();
 
-    const onLogout = () => {
+    const onLogout = useCallback(() => { 
+        // Header 컴포넌트를 memo로 감싸주었으나 계속 리렌더 되는 현상이 있다.
+        // 이는 Maker 컴포넌트가 렌더 되는 것과 동시에 onLogout 함수가 호출이 되기 때문이다.
+        // 이 onLogout 함수는 Header 컴포넌트에 prop으로 넘겨주기 때문에...
+        // 이를 방지하고자 useCallback함수를 사용해 리렌더를 방지한다.
+        // 하지만 무조건 1회성으로 사용되면 아된다. 
+        // 사용자가 로그아웃을 실제로 실행할때 authService의 상태가 변경되고, onLogout 함수는 재사용되어야만 한다.
+
         console.log(`%c로그아웃 | time: ${new Date}`, "color: darkorange");
         authService.logout();
-    }
+    }, [authService]);
     useEffect(() => {
         if(!userId) return;
 

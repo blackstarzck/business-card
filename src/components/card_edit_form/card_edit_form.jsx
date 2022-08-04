@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Button from '../button/button';
 // import ImageFileInput from '../image_file_input/image_file_input'; // Fileinput 컴포넌트로 대체 되었다.
 import styles from "./card_edit_form.module.css"
 
 
-const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
+const CardEditForm = memo(({ FileInput, card, updateCard, deleteCard }) => {
     const { id, name, company, title, email, message, theme, fileName, fileURL } = card;
 
     const onFileChange = file => {
@@ -48,6 +48,6 @@ const CardEditForm = ({ FileInput, card, updateCard, deleteCard }) => {
             <Button name="Delete" onClick={onSubmit}/>
         </form>
     );
-};
+});
 
 export default CardEditForm
