@@ -19,7 +19,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
     }
     useEffect(() => {
         if(!userId) return;
-        
+
         const stopSync = cardRepository.syncCard(userId, cards => {
             setCards(cards);
         });
@@ -28,7 +28,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
         // 불필요한 네트워크 사용을 최소화 하기 위함
         return () => stopSync();
 
-    }, [userId]);
+    }, [userId, cardRepository]);
 
     useEffect(() => {
         authService
@@ -40,7 +40,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
                 navigate("/"); // 로그인 화면으로  이동
             }
         });
-    });
+    }, [authService, userId, navigate]);
 
     const createOrUpdateCard = card => {
         // #1:
