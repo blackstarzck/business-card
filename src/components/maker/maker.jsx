@@ -45,7 +45,7 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
                 setUserId(user.uid);
                 console.log(`firebase user ID: ${userId}`);
             }else{
-                navigate("/business-card"); // 로그인 화면으로  이동
+                navigate("/"); // 로그인 화면으로  이동
             }
         });
     }, [authService, userId, navigate]);
