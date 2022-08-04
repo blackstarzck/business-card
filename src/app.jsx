@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter , BrowserRouter, Routes, Route } from 'react-router-dom';
 import styles from './app.module.css';
 import Login from './components/login/login';
 import Maker from './components/maker/maker';
@@ -7,11 +7,10 @@ import Maker from './components/maker/maker';
 function App({ FileInput, authService, cardRepository }) {
   return (
     <div className={styles.app}>
-      ?
-      <BrowserRouter>
+      <BrowserRouter basename="/business-card">
         <Routes>
           <Route 
-            path="/business-card"
+            path="/"
             element={ <Login authService={authService} /> }
           />
           <Route
