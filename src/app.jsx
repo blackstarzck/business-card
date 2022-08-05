@@ -1,10 +1,13 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import styles from './app.module.css';
 import Login from './components/login/login';
 import Maker from './components/maker/maker';
 
 function App({ FileInput, authService, cardRepository }) {
+  const historyState = useNavigate();
+  // console.log(historyState.state)
+
   return (
     <div className={styles.app}>
       <Routes>
@@ -13,7 +16,7 @@ function App({ FileInput, authService, cardRepository }) {
           element={ <Login authService={authService} /> }
         />
         <Route
-          path="/maker"
+          path={`${process.env.PUBLIC_URL}/maker`}
           element={
             <Maker
               FileInput={FileInput}
