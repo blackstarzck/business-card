@@ -43,8 +43,9 @@ const Maker = ({ FileInput, authService, cardRepository }) => {
         .onAuthChange(user => {
             if(user){
                 setUserId(user.uid);
-                console.log(`firebase user ID: ${userId}`);
+                console.log(`유저정보 O firebase user ID: ${userId}`);
             }else{
+                console.log(`유저정보 X`)
                 navigate("/"); // 로그인 화면으로  이동
             }
         });
