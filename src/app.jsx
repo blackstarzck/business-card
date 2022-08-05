@@ -5,8 +5,7 @@ import Login from './components/login/login';
 import Maker from './components/maker/maker';
 
 function App({ FileInput, authService, cardRepository }) {
-  const historyState = useNavigate();
-  // console.log(historyState.state)
+  console.log(window.location.pathname)
 
   return (
     <div className={styles.app}>

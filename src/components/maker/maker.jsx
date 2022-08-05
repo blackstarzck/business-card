@@ -2,12 +2,16 @@ import React, { useCallback, useEffect, useState } from 'react'
 import styles from "./maker.module.css"
 import Footer from '../footer/footer';
 import Header from '../header/header';
-import { useNavigate } from "react-router-dom";
+import { useLocation , useNavigate } from "react-router-dom";
 import Editor from '../editor/editor';
 import Preview from '../preview/preview';
 
 const Maker = ({ FileInput, authService, cardRepository }) => {
     const historyState = useNavigate().state;
+    const match = useLocation ();
+
+    console.log(match)
+
     const [ userId, setUserId ] = useState( historyState && historyState.id );
     const [ cards, setCards ] = useState({});
 
