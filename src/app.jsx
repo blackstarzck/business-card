@@ -9,7 +9,7 @@ function App({ FileInput, authService, cardRepository }) {
     <div className={styles.app}>
       <Routes>
         <Route 
-          path="/"
+          path="/*"
           element={ <Login authService={authService} /> }
         />
         <Route
