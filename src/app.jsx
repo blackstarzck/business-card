@@ -7,7 +7,7 @@ import Maker from './components/maker/maker';
 function App({ FileInput, authService, cardRepository }) {
   return (
     <div className={styles.app}>
-      <HashRouter>
+      <BrowserRouter basename='/business-card'>
         <Routes>
           <Route 
             path="/"
@@ -24,7 +24,7 @@ function App({ FileInput, authService, cardRepository }) {
             }  
           />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }
