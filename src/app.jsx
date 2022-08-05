@@ -9,22 +9,22 @@ function App({ FileInput, authService, cardRepository }) {
   return (
     <div className={styles.app}>
       <h1>{timeStamp}</h1>
-        <Routes>
-          <Route 
-            path="/"
-            element={ <Login authService={authService} /> }
-          />
-          <Route
-            path="/maker"
-            element={
-              <Maker
-                FileInput={FileInput}
-                authService={authService}
-                cardRepository={cardRepository}
-              />
-            }  
-          />
-        </Routes>
+      <Routes>
+        <Route 
+          path="/"
+          element={ <Login authService={authService} /> }
+        />
+        <Route
+          path="/maker"
+          element={
+            <Maker
+              FileInput={FileInput}
+              authService={authService}
+              cardRepository={cardRepository}
+            />
+          }  
+        />
+      </Routes>
     </div>
   );
 }
