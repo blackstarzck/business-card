@@ -16,7 +16,7 @@ function App({ FileInput, authService, cardRepository }) {
           element={ <Login authService={authService} /> }
         />
         <Route
-          path={`${process.env.PUBLIC_URL}/maker`}
+          path="/maker"
           element={
             <Maker
               FileInput={FileInput}
