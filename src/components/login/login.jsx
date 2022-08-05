@@ -18,6 +18,8 @@ const Login = ({ authService }) => {
         console.log(`%c로그인 | UID: ${data.user.uid} | time: ${new Date}`, "color: gold");
         console.log(data);
         goToMaker(data.user.uid);
+      }).catch((error) => {
+        console.log(error.message || error);
       });
   };
 
@@ -49,7 +51,7 @@ const Login = ({ authService }) => {
           </li>
         </ul>
       </section>
-      <Footer />
+      {/* <Footer /> */}
     </section>
   );
 };
