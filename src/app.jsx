@@ -5,10 +5,8 @@ import Login from './components/login/login';
 import Maker from './components/maker/maker';
 
 function App({ FileInput, authService, cardRepository }) {
-  const timeStamp = new Date().getSeconds();
   return (
     <div className={styles.app}>
-      <h1>{timeStamp}</h1>
       <Routes>
         <Route 
           path="/"
