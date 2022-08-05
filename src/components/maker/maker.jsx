@@ -8,10 +8,6 @@ import Preview from '../preview/preview';
 
 const Maker = ({ FileInput, authService, cardRepository }) => {
     const historyState = useNavigate().state;
-    const match = useLocation ();
-
-    console.log(match)
-
     const [ userId, setUserId ] = useState( historyState && historyState.id );
     const [ cards, setCards ] = useState({});
 
